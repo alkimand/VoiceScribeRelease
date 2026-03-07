@@ -1,0 +1,2 @@
+# VoiceScribeRelease
+VoiceScribe project
