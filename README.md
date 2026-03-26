@@ -61,40 +61,81 @@ Captures whatever is currently playing through your speakers or headphones — a
 ## First-Time Setup: Downloading a Model
 
 VoiceScribe requires a speech recognition model before you can start transcribing.  
-Models are downloaded once and stored locally.
+Models are downloaded once and stored locally. The **Settings → Models** page is split into two sections:
 
-### Step 1 — Open Settings → Models
+- **Active Model** — shows which model is currently loaded and lets you switch between installed models instantly.
+- **Download Models** — browse and download new models by language.
 
-Click **Settings** in the left sidebar, then select **Models** in the settings menu.
+---
 
-### Step 2 — Select your language
+### Step 1 — Open Settings → Models → Download Models
 
-From the **Language** dropdown, choose the language of the audio you'll be transcribing.
+Click **Settings** in the left sidebar, then select **Models**.  
+Scroll to the **Download Models** section.
 
-> **Tip:** If you primarily work with one language, always pick a language-specific **Zipformer** model (e.g. *Russian*, *English*, *Chinese*, *Korean*, etc.) rather than *Multilingual*.  
-> Language-specific Zipformer models are faster, have lower latency, and are **significantly more accurate** than a general-purpose Whisper multilingual model — because they are trained and optimized for one language only.
+### Step 2 — Choose your language and model type
 
-### Step 3 — Choose a model size
+From the **Language** dropdown, choose the language of the audio you'll be transcribing.  
+Then pick a model from the **Select Model** dropdown.
 
-Each language offers several model options:
+#### Which model type should I choose?
+
+There are two families of models:
+
+| Model type | Languages | Speed | Accuracy | RAM |
+|---|---|---|---|---|
+| **Zipformer** | One language only | ⚡ Very fast | ✅ Excellent for that language | Low |
+| **Whisper** | 99 languages (Multilingual) | Slower | Good across languages | Higher |
+
+> **Recommendation:** If you primarily work with one language, always choose a **Zipformer** model for that language (e.g. *Russian*, *English*, *Chinese*, *Korean*).  
+> Zipformer models are faster, have lower latency, and are **significantly more accurate** than Whisper for the language they were trained on.  
+> Use **Whisper** only if you need to switch between languages frequently or transcribe mixed-language audio.
+
+#### Model size
 
 | Size | Quality | Use case |
-|------|---------|----------|
-| ~100 MB | Good | Fast machines, quick testing |
+|---|---|---|
+| ~60–100 MB | Decent | Fast machines, quick testing, low RAM |
 | **200–300 MB** | **Best** | **Recommended for everyday use** |
 
-> **Recommendation:** Download a model that is **200 MB or larger** — they are significantly more accurate, handle accents better, and make fewer mistakes on uncommon words.  
-> The extra download size is worth it for daily use.
+> Larger models handle accents better and make fewer mistakes on uncommon words. The extra download size is worth it for daily use.
 
-### Step 4 — Download
+### Step 3 — Download
 
-Select the model from the **Select Model** dropdown and wait for the download to complete.  
-A progress bar shows download status. You can cancel and resume if needed.
+Click **Download** and wait for the progress bar to complete.  
+The model will appear in the **Active Model** section once installed.
 
-### Step 5 — Start transcribing
+---
 
-Go back to **Dashboard** and press **Start Recording** (or use your hotkey `Win+Ctrl`).  
-Switch to any app, and the transcribed text will be typed there automatically.
+### Step 4 — Select the Active Model
+
+Once a model is downloaded, go to the **Active Model** section at the top of the Models page.
+
+1. Use the **Language** filter to narrow the list to your language.
+2. Pick the model from the **Model** dropdown — it loads automatically, no restart needed.
+
+> You can download multiple models and switch between them at any time from this section.
+
+---
+
+### Step 5 (Whisper only) — Set Speech Language
+
+If you are using a **Whisper Multilingual** model, you will see a **Speech Language** dropdown in the Active Model section.
+
+**⚠️ Always set this to the language you are speaking — do not leave it on Auto if you know your language.**
+
+| Setting | When to use |
+|---|---|
+| **Auto** | Mixed-language audio, or you don't know the language in advance |
+| **Your language** (e.g. Russian, Greek, Filipino) | Any time you know what language you'll be speaking |
+
+Setting the language explicitly makes Whisper:
+- **Faster** — it skips language detection on every segment
+- **More accurate** — it stops guessing and focuses on the right vocabulary
+- **Less likely to hallucinate** — Auto mode sometimes produces random text during silence or noise
+
+> **This setting is for the language you _speak_, not the language you want output in.**  
+> If you want to translate speech to another language, use **AI Output Language** in **Settings → AI Text Processing**.
 
 ---
 
@@ -104,7 +145,8 @@ Switch to any app, and the transcribed text will be typed there automatically.
 - **System Audio** — to transcribe a video or podcast, switch to *System Audio* in **Settings → Audio**, play the media, and press the hotkey. No virtual cable needed.
 - **Pause = new paragraph** — natural pauses in speech are detected and converted into paragraph breaks automatically.
 - **AI cleanup** — enable **AI Text Processing** in Settings for automatic punctuation and grammar corrections after each transcription.
-- **Language hint** — if you notice the model mixing languages or making errors on domain-specific words, try switching to a larger model.
+- **Switching models** — you can install several models and switch the active one in **Settings → Models → Active Model** without restarting the app.
+- **Whisper + specific language** — if you use Whisper and notice it occasionally switching to English or producing garbled text, set the Speech Language explicitly instead of using Auto.
 
 ---
 
