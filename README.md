@@ -23,6 +23,7 @@ Capture speech from your **microphone** or directly from **system audio** (any a
 - **AI text post-processing** *(optional, requires internet)* — LLM-powered cleanup after each transcription: removes filler words (*"um"*, *"uh"*), fixes sentence boundaries, groups sentences into paragraphs, formats lists and enumerations.
 - **Output language / translation** *(optional, requires internet)* — automatically translate the result into a different language. Transcribe in Russian, get output in English — or any other combination.
 - **Flexible text insertion modes** — insert at cursor, append to end of field, or replace selected text.
+- **File transcription** — drop an audio file (MP3, WAV, M4A, OGG) or a video (MP4, MKV, AVI) into the **History** page and VoiceScribe will transcribe it offline, exactly like a live recording. The result is saved as a regular history entry — searchable, replayable, and available for AI post-processing.
 - **Pause detection** — silence automatically starts a new paragraph, so your transcribed text is structured.
 - **System tray** support — runs quietly in the background.
 
@@ -39,6 +40,36 @@ Standard input from any microphone connected to your system. Best for dictation 
 Captures whatever is currently playing through your speakers or headphones — a video, a podcast, a call, a browser tab. Uses native Windows WASAPI loopback, so no virtual audio cable or third-party software is required.
 
 > **Tip for System Audio:** Use a language-specific Zipformer model for best results. Whisper multilingual models work too but require more RAM and take longer to process.
+
+---
+
+## File Transcription
+
+VoiceScribe can transcribe existing audio and video files — no real-time recording needed.
+
+Open the **History** page and click the **Import** button in the top toolbar.
+
+![History page — Import button](screenshots/history_import.png)
+
+> **Note on the button label:** The button currently reads *"Import audio file (WAV)"* — this is a UI translation quirk, not a format restriction. VoiceScribe accepts any common audio or video format; it extracts the audio track automatically before transcription.
+
+Supported formats:
+
+| Type | Formats |
+|---|---|
+| **Audio** | MP3, WAV, M4A, OGG, FLAC, AAC, and others |
+| **Video** | MP4, MKV, AVI, MOV, and others |
+
+VoiceScribe extracts the audio track and processes it through the same local ASR pipeline as a live recording. The result appears as a regular history entry — complete with timestamps, searchable text, and optional AI post-processing (punctuation, formatting, translation).
+
+**Typical use cases:**
+- Transcribe a recorded meeting, lecture, or interview
+- Convert a podcast or video file to text for editing or reference
+- Transcribe with a fast model first, then switch to a larger one and re-transcribe if the result isn't accurate enough
+
+> **Tip — switching models:** Not happy with the result? Go to **Settings → Models → Active Model**, pick a different model (e.g. upgrade from a small Zipformer to Whisper Large), then open the history entry and hit **Re-transcribe**. The original audio is preserved — you can run it through any installed model at any time, without re-recording or re-importing the file.
+
+> **Performance note:** File transcription runs fully offline using the model selected in **Settings → Models**. Processing time depends on file length and model size — a 60-minute file on a mid-range CPU typically takes 3–6 minutes.
 
 ---
 
@@ -146,6 +177,7 @@ Setting the language explicitly makes Whisper:
 - **Pause = new paragraph** — natural pauses in speech are detected and converted into paragraph breaks automatically.
 - **AI cleanup** — enable **AI Text Processing** in Settings for automatic punctuation and grammar corrections after each transcription.
 - **Switching models** — you can install several models and switch the active one in **Settings → Models → Active Model** without restarting the app.
+- **Re-transcribe with a better model** — recorded something but not satisfied with the accuracy? Switch to a larger or more accurate model in **Settings → Models**, then open the history entry and tap **Re-transcribe**. The audio is always saved locally, so you can redo transcription with any model at any time.
 - **Whisper + specific language** — if you use Whisper and notice it occasionally switching to English or producing garbled text, set the Speech Language explicitly instead of using Auto.
 
 ---
